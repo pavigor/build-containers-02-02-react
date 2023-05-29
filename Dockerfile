@@ -12,15 +12,15 @@ RUN apk add openssl && \
 WORKDIR /app
 COPY . .
 
-RUN npm install
+RUN yarn install
 
 FROM source as test-runner
 WORKDIR /app
-RUN npm run test -- --forceExit --runInBand --watchAll=false
+RUN yarn run test -- --forceExit --runInBand --watchAll=false
 
 FROM source as builder
 WORKDIR /app
-RUN npm run build
+RUN yarn run build
 
 FROM nginx:1.22-alpine
 
